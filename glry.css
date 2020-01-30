@@ -1,0 +1,10 @@
+.glry{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+}
+
+.glry-slide{
+    flex-shrink: 0;
+}
