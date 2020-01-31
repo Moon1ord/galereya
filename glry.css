@@ -1,10 +1,18 @@
-.glry{
+.glry-wrapper{
     display: flex;
     position: relative;
-    overflow: hidden;
     align-items: center;
+    width: 100%;
+    width: inherit;
+    height: inherit;
 }
 
 .glry-slide{
     flex-shrink: 0;
+    height: inherit;
+    width: inherit;
+}
+
+.glry{
+    overflow: hidden;
 }

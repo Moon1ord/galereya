@@ -9,23 +9,47 @@ class Galereya{
                 this.current_slide = null;
                 this.root_class_name = root_class_name;
                
-                function GetSlides(slider){
-                   if(slider.querySelectorAll(":not(."+class_name+"-slide)").length > 0){
+                function getSlides(slider){
+                   if(slider.querySelectorAll("div:not(."+class_name+"-slide)").length > 0){
                         throw 'Slider contains non slide elements';
                    }else {
                     self.slides = slider.children;
                     self.current_slide = self.slides[0];
                    }  
-                }
+                };
 
-                function WrapCssSlides(array_of_slides){
+                function wrapCssSlides(array_of_slides){
                    for (let slide of array_of_slides){
                       slide.classList.add(root_class_name + '-slide'); 
                    }
+                };
+
+                function wrapGalleries(elem){
+                    var wrapper = document.createElement('div');
+                    wrapper.classList.add(root_class_name+'-wrapper');
+                    elem.parentNode.insertBefore(wrapper, elem);
+                    wrapper.appendChild(elem);
+
+                    //elem.innerHTML = "<div class='"+ self.root_class_name+"-wrapper'>" + elem.innerHTML + "</div>";
                 }
 
-                GetSlides(this.element);
-                WrapCssSlides(this.slides);
+                function addDragnDrop(slider){
+                    slider.addEventListener('dragstart', dragStart);
+                    slider.addEventListener('dragend', dragEnd);
+
+                    function dragStart(){
+                        console.log('start');
+                    }
+
+                    function dragEnd(){
+                        console.log('end');
+                    }
+                }
+
+                getSlides(this.element);
+                wrapCssSlides(this.slides);
+                wrapGalleries(this.element);
+                addDragnDrop(this.element);
             }
         }
 
