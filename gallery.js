@@ -5,21 +5,26 @@ class Galereya{
         this.sliders = [];
         class Slider{
             constructor(wrapper, root_class){
+                const self = this;
                 this.slides = wrapper.querySelectorAll('div');
+                this.amountOfSlides = this.slides.length;
+                this.currentSlide = 0;
 
-                wrapper.addEventListener('dragstart', dragStart);
-                wrapper.addEventListener('dragend', dragEnd);
+                wrapper.addEventListener('click', function(){
+                    if(self.currentSlide < self.amountOfSlides - 1){
+                        self.currentSlide++;
+                    }else{
+                        self.currentSlide = 0;
+                    }
 
-                function dragStart(){
-                    console.log('start');
-                }
+                    wrapper.style.transform = 'translateX(' + self.currentSlide * -100 + '%)'; 
+                });
 
-                function dragEnd(){
-                    console.log('end');
-                }
-
-                this.slides.forEach(slide => {
+                this.slides.forEach(function(slide, index){
                     slide.classList.add(root_class + '-slide')
+                    if(index === 0){
+                        slide.classList.add('current');
+                    }
                 });
             }
         }
