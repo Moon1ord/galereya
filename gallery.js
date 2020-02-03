@@ -24,6 +24,18 @@ class Galereya{
                     console.log(self.currentSlide);
                 };
 
+                function paginationLeft(){
+                    console.log(self.currentSlide);
+
+                    if(self.currentSlide <= 0){
+                        self.currentSlide = self.amountOfSlides -1;
+                    } else{
+                        self.currentSlide--
+                    }
+                    
+                    wrapper.style.transform = 'translateX(' + self.currentSlide * -100 + '%)'; 
+                }
+
                 params.right_arrow.addEventListener('click', this.moveToRightSlide);
                 params.left_arrow.addEventListener('click', this.moveToLeftSlide);
                 
