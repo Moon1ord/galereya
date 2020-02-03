@@ -1,70 +1,35 @@
 class Galereya{
-    constructor(element_classname) {
+    constructor(class_selector){
+        const root_class = 'glry';
+        this.elements = document.querySelectorAll("."+class_selector);
+        this.sliders = [];
         class Slider{
-            constructor(elem, class_name, root_class_name){
-                const self = this;
+            constructor(wrapper, root_class){
+                this.slides = wrapper.querySelectorAll('div');
 
-                this.element = elem;
-                this.slides = [];
-                this.current_slide = null;
-                this.root_class_name = root_class_name;
-               
-                function getSlides(slider){
-                   if(slider.querySelectorAll("div:not(."+class_name+"-slide)").length > 0){
-                        throw 'Slider contains non slide elements';
-                   }else {
-                    self.slides = slider.children;
-                    self.current_slide = self.slides[0];
-                   }  
-                };
+                wrapper.addEventListener('dragstart', dragStart);
+                wrapper.addEventListener('dragend', dragEnd);
 
-                function wrapCssSlides(array_of_slides){
-                   for (let slide of array_of_slides){
-                      slide.classList.add(root_class_name + '-slide'); 
-                   }
-                };
-
-                function wrapGalleries(elem){
-                    var wrapper = document.createElement('div');
-                    wrapper.classList.add(root_class_name+'-wrapper');
-                    elem.parentNode.insertBefore(wrapper, elem);
-                    wrapper.appendChild(elem);
-
-                    //elem.innerHTML = "<div class='"+ self.root_class_name+"-wrapper'>" + elem.innerHTML + "</div>";
+                function dragStart(){
+                    console.log('start');
                 }
 
-                function addDragnDrop(slider){
-                    slider.addEventListener('dragstart', dragStart);
-                    slider.addEventListener('dragend', dragEnd);
-
-                    function dragStart(){
-                        console.log('start');
-                    }
-
-                    function dragEnd(){
-                        console.log('end');
-                    }
+                function dragEnd(){
+                    console.log('end');
                 }
 
-                getSlides(this.element);
-                wrapCssSlides(this.slides);
-                wrapGalleries(this.element);
-                addDragnDrop(this.element);
+                this.slides.forEach(slide => {
+                    slide.classList.add(root_class + '-slide')
+                });
             }
         }
-
-        const self = this;
-
-        const root_class_name = 'glry';
-        this.sliders = [];
-        this.class_name = element_classname; 
-
-        let elements = document.querySelectorAll('.' + element_classname);
-
-        elements.forEach(function(elem){
-            elem.classList.add(root_class_name);
-            let slider = new Slider(elem, self.class_name, root_class_name);
-            self.sliders.push(slider);
+        
+        this.elements.forEach(element => {
+            element.classList.add(root_class);
+            let wrapper = element.children[0];
+            wrapper.classList.add(root_class + '-wrapper');
+            let slider = new Slider(wrapper, root_class);
+            this.sliders.push(slider);
         });
     }
 }

@@ -1,18 +1,19 @@
+.glry{
+    overflow: hidden;
+}
+
 .glry-wrapper{
     display: flex;
-    position: relative;
-    align-items: center;
-    width: 100%;
     width: inherit;
     height: inherit;
 }
 
 .glry-slide{
+    margin: auto;
+    width: 100%;
     flex-shrink: 0;
-    height: inherit;
-    width: inherit;
 }
 
-.glry{
-    overflow: hidden;
+.glry-slide > img{
+    width:100%;
 }
