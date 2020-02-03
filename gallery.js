@@ -13,20 +13,15 @@ class Galereya{
                 this.moveToLeftSlide = ()=>{paginationLeft();};
 
                 function paginationRight(){
-                    console.log(self.currentSlide);
-
                     if(self.currentSlide < self.amountOfSlides - 1){
                         self.currentSlide++;
                     }else{
                         self.currentSlide = 0
                     }
                     wrapper.style.transform = 'translateX(' + self.currentSlide * -100 + '%)'; 
-                    console.log(self.currentSlide);
                 };
 
                 function paginationLeft(){
-                    console.log(self.currentSlide);
-
                     if(self.currentSlide <= 0){
                         self.currentSlide = self.amountOfSlides -1;
                     } else{
